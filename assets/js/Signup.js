@@ -28,7 +28,7 @@ async function SignupToTeam(in_token, user, email)
   });
 };
 
-async function SignupToOrg(in_token, user, email)
+async function SignupToOrg(in_token, email)
 {
   if (!in_token)
   {
@@ -80,22 +80,24 @@ const ToOrgButton = document.getElementById("ToOrg");
 ToOrgButton.addEventListener(
   'click', 
   ()=> {
-    var user_name = document.getElementsByName('user_name')[0].value;
     var user_email = document.getElementsByName('user_email')[0].value;
     var in_token = document.getElementsByName('token')[0].value;
-    SignupToOrg(in_token, user_name, user_email);
+    SignupToOrg(in_token, user_email);
   }
 );
 
 const ToTeamButton = document.getElementById("ToTeam");
+if (ToTeamButton)
+{
+  ToTeamButton.addEventListener(
+    'click', 
+    ()=> {
+      var user_name = document.getElementsByName('user_name')[0].value;
+      var user_email = document.getElementsByName('user_email')[0].value;
+      var in_token = document.getElementsByName('token')[0].value;
+      SignupToTeam(in_token, user_name, user_email);
+    }
+  );
+}
 
-ToTeamButton.addEventListener(
-  'click', 
-  ()=> {
-    var user_name = document.getElementsByName('user_name')[0].value;
-    var user_email = document.getElementsByName('user_email')[0].value;
-    var in_token = document.getElementsByName('token')[0].value;
-    SignupToTeam(in_token, user_name, user_email);
-  }
-);
 // console.log(token);
