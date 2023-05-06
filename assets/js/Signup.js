@@ -23,22 +23,31 @@ async function SignupToTeam(in_token, user, email)
         'X-GitHub-Api-Version': '2022-11-28'
       }
     }
-  )  
+  ).catch(err, ()=> {
+
+  });
 };
 
 async function SignupToOrg(in_token, user, email)
 {
+  if (!in_token)
+  {
+    const octokit = new Octokit({
+      auth: in_token
+    })
+  }
   // Octokit.js
   // https://github.com/octokit/core.js#readme
-  const octokit = new Octokit({
-    auth: in_token
-  })
-  // console.log(token);
 
-  console.log(user);
+  if (!email)
+  {
+    alert('emailを入力してください');
+    return;
+  }
+
   console.log(email);
 
-  await octokit.request(
+  const response = await octokit.request(
     'POST /orgs/{org}/invitations', 
     {
       org: 'pto8913project',
@@ -53,31 +62,16 @@ async function SignupToOrg(in_token, user, email)
       }
     }
   )
-};
 
-async function assignTeam(user, user_emailkit)
-{
-  const result = await octokit.request(
-    "GET /orgs/{org}/members/{username}/",
-    { 
-      username: user,
-      org: "pto8913project",
-    }
-  ).catch(
-    async (err) => {
-      if(err.status === 404)
-      {
-        console.log("user is not a team mamber but part of the org", err.status);
-      }
-    }
-  );
-
-  if (result)
+  if (response.status === 204)
   {
-    if (result.status === 204)
-    {
-
-    }
+    alert("pto8913から{mail}に招待メールが送られました", {mail: email});
+    return;
+  }
+  if (response.status === 401)
+  {
+    alert("tokenかemailが間違っています確認してください。\n tokenが間違っている場合はpto8913project@gmail.comにご連絡ください");
+    return;
   }
 };
 
