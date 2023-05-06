@@ -1,0 +1,38 @@
+#encoding: utf-8
+
+title: pto8913
+author: pto8913
+#email: your-email@example.com
+#>- # this means to ignore newlines until "baseurl:"
+description: 制作物や知見を置いていく場所
+twitter_username: pitodesu
+github_username: pto8913
+
+lang: "jp"
+excerpt_separator: "\n\n\n"
+date_format: "%B %d, %Y"
+
+markdown: kramdown
+
+# Layout
+
+show_excerpts: true        # show article excerpts on the home page
+show_frame: true           # adds a gray frame to the site
+show_sidebar: false        # show a sidebar instead of the usual header
+minimal: false             # use a dark header
+future: true
+published: true
+
+permalink: /:categories/:title.html
+permalink_pattern: /:dir/:categories/:title.html
+
+baseURL: "https://pto8913project.github.io/Signup/"
+
+github: [metadata]
+repository: pto8913project.github.io/Signup
+
+# Build settings
+# remote_theme: niklasbuschmann/contrast
+theme: minima
+highlighter: rouge
+#theme: jekyll-theme-architect
