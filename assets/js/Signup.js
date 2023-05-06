@@ -38,9 +38,14 @@ async function SignupToOrg(in_token, email)
       }
     }
   )
-  if (response.status === 204)
+  if (response.status === 201)
   {
     alert("pto8913から{mail}に招待メールが送られました", {mail: email});
+    return;
+  }
+    if (response.status === 401)
+  {
+    alert("すでに送信済みです{mail}をご確認ください。", {mail, email});
     return;
   }
   if (response.status === 401)
