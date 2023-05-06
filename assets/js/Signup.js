@@ -19,13 +19,10 @@ import { Octokit } from "https://cdn.skypack.dev/@octokit/rest";
 // https://docs.github.com/en/rest/orgs/members?apiVersion=2022-11-28
 async function SignupToOrg(in_token, email)
 {
-  if (in_token)
-  {
-    const octokit = new Octokit({
-      auth: in_token
-    })
-  }
-  else
+  const octokit = new Octokit({
+    auth: in_token
+  })
+  if (!in_token)
   {
     alert('tokenを入力してください');
     return;
