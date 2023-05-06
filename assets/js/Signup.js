@@ -1,5 +1,5 @@
 import { Octokit } from "https://cdn.skypack.dev/@octokit/rest";
-import { token } from "https://pto8913project.github.io/Signup/assets/js/ignore/config.js";
+// import { token } from "https://pto8913project.github.io/Signup/assets/js/ignore/config.js";
 
 async function SignupToTeam(in_token, user, email)
 {
@@ -33,7 +33,7 @@ async function SignupToOrg(in_token, user, email)
   const octokit = new Octokit({
     auth: in_token
   })
-  console.log(token);
+  // console.log(token);
 
   console.log(user);
   console.log(email);
@@ -104,4 +104,4 @@ ToTeamButton.addEventListener(
     SignupToTeam(in_token, user_name, user_email);
   }
 );
-console.log(token);
+// console.log(token);
