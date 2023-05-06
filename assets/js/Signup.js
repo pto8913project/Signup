@@ -1,6 +1,6 @@
 import { Octokit } from "https://cdn.skypack.dev/@octokit/rest";
-  // Octokit.js
-  // https://github.com/octokit/core.js#readme
+// Octokit.js
+// https://github.com/octokit/core.js#readme
 
 // add team member 
 // https://docs.github.com/en/rest/teams/members?apiVersion=2022-11-28
@@ -9,9 +9,6 @@ import { Octokit } from "https://cdn.skypack.dev/@octokit/rest";
 // https://docs.github.com/en/rest/orgs/members?apiVersion=2022-11-28
 async function SignupToOrg(in_token, email)
 {
-  const octokit = new Octokit({
-    auth: in_token
-  })
   if (!in_token)
   {
     alert('tokenを入力してください');
@@ -22,6 +19,10 @@ async function SignupToOrg(in_token, email)
     alert('emailを入力してください');
     return;
   }
+
+  const octokit = new Octokit({
+    auth: in_token
+  })
   const response = await octokit.request(
     'POST /orgs/{org}/invitations', 
     {
