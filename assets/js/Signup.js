@@ -1,21 +1,11 @@
 import { Octokit } from "https://cdn.skypack.dev/@octokit/rest";
+  // Octokit.js
+  // https://github.com/octokit/core.js#readme
 
+// add team member 
 // https://docs.github.com/en/rest/teams/members?apiVersion=2022-11-28
-//   await octokit.request(
-//     'PUT /orgs/{org}/teams/{team_slug}/memberships/{username}', 
-//     {
-//       org: 'pto8913project',
-//       team_slug: "read",
-//       username: user,
-//       role: 'member',
-//       headers: {
-//         'X-GitHub-Api-Version': '2022-11-28'
-//       }
-//     }
-//   ).catch(err, ()=> {
-//   });
-// };
 
+// add org member
 // https://docs.github.com/en/rest/orgs/members?apiVersion=2022-11-28
 async function SignupToOrg(in_token, email)
 {
@@ -27,15 +17,11 @@ async function SignupToOrg(in_token, email)
     alert('tokenを入力してください');
     return;
   }
-  // Octokit.js
-  // https://github.com/octokit/core.js#readme
-
   if (!email)
   {
     alert('emailを入力してください');
     return;
   }
-
   const response = await octokit.request(
     'POST /orgs/{org}/invitations', 
     {
