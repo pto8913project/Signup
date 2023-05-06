@@ -1,32 +1,32 @@
 import { Octokit } from "https://cdn.skypack.dev/@octokit/rest";
 // import { token } from "https://pto8913project.github.io/Signup/assets/js/ignore/config.js";
 
-async function SignupToTeam(in_token, user, email)
-{
-  console.log(user);
-  console.log(email);
+// async function SignupToTeam(in_token, user, email)
+// {
+//   console.log(user);
+//   console.log(email);
 
-  const octokit = new Octokit(
-    {
-      auth: in_token
-    }
-  );
+//   const octokit = new Octokit(
+//     {
+//       auth: in_token
+//     }
+//   );
 
-  await octokit.request(
-    'PUT /orgs/{org}/teams/{team_slug}/memberships/{username}', 
-    {
-      org: 'pto8913project',
-      team_slug: "read",
-      username: user,
-      role: 'member',
-      headers: {
-        'X-GitHub-Api-Version': '2022-11-28'
-      }
-    }
-  ).catch(err, ()=> {
+//   await octokit.request(
+//     'PUT /orgs/{org}/teams/{team_slug}/memberships/{username}', 
+//     {
+//       org: 'pto8913project',
+//       team_slug: "read",
+//       username: user,
+//       role: 'member',
+//       headers: {
+//         'X-GitHub-Api-Version': '2022-11-28'
+//       }
+//     }
+//   ).catch(err, ()=> {
 
-  });
-};
+//   });
+// };
 
 async function SignupToOrg(in_token, email)
 {
@@ -86,18 +86,16 @@ ToOrgButton.addEventListener(
   }
 );
 
-const ToTeamButton = document.getElementById("ToTeam");
-if (ToTeamButton)
-{
-  ToTeamButton.addEventListener(
-    'click', 
-    ()=> {
-      var user_name = document.getElementsByName('user_name')[0].value;
-      var user_email = document.getElementsByName('user_email')[0].value;
-      var in_token = document.getElementsByName('token')[0].value;
-      SignupToTeam(in_token, user_name, user_email);
-    }
-  );
-}
-
-// console.log(token);
+// const ToTeamButton = document.getElementById("ToTeam");
+// if (ToTeamButton)
+// {
+//   ToTeamButton.addEventListener(
+//     'click', 
+//     ()=> {
+//       var user_name = document.getElementsByName('user_name')[0].value;
+//       var user_email = document.getElementsByName('user_email')[0].value;
+//       var in_token = document.getElementsByName('token')[0].value;
+//       SignupToTeam(in_token, user_name, user_email);
+//     }
+//   );
+// }
