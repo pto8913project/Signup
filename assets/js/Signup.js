@@ -1,11 +1,6 @@
 import { Octokit } from "https://cdn.skypack.dev/@octokit/rest";
-// import { token } from "https://pto8913project.github.io/Signup/assets/js/ignore/config.js";
-
-// async function SignupToTeam(in_token, user, email)
+// async function SignupToTeam(in_token, user)
 // {
-//   console.log(user);
-//   console.log(email);
-
 //   const octokit = new Octokit(
 //     {
 //       auth: in_token
@@ -45,8 +40,6 @@ async function SignupToOrg(in_token, email)
     return;
   }
 
-  console.log(email);
-
   const response = await octokit.request(
     'POST /orgs/{org}/invitations', 
     {
@@ -62,7 +55,6 @@ async function SignupToOrg(in_token, email)
       }
     }
   )
-
   if (response.status === 204)
   {
     alert("pto8913から{mail}に招待メールが送られました", {mail: email});
@@ -76,7 +68,6 @@ async function SignupToOrg(in_token, email)
 };
 
 const ToOrgButton = document.getElementById("ToOrg");
-
 ToOrgButton.addEventListener(
   'click', 
   ()=> {
@@ -85,17 +76,3 @@ ToOrgButton.addEventListener(
     SignupToOrg(in_token, user_email);
   }
 );
-
-// const ToTeamButton = document.getElementById("ToTeam");
-// if (ToTeamButton)
-// {
-//   ToTeamButton.addEventListener(
-//     'click', 
-//     ()=> {
-//       var user_name = document.getElementsByName('user_name')[0].value;
-//       var user_email = document.getElementsByName('user_email')[0].value;
-//       var in_token = document.getElementsByName('token')[0].value;
-//       SignupToTeam(in_token, user_name, user_email);
-//     }
-//   );
-// }
