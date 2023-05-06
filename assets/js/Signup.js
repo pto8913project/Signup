@@ -1,12 +1,6 @@
 import { Octokit } from "https://cdn.skypack.dev/@octokit/rest";
-// async function SignupToTeam(in_token, user)
-// {
-//   const octokit = new Octokit(
-//     {
-//       auth: in_token
-//     }
-//   );
 
+// https://docs.github.com/en/rest/teams/members?apiVersion=2022-11-28
 //   await octokit.request(
 //     'PUT /orgs/{org}/teams/{team_slug}/memberships/{username}', 
 //     {
@@ -19,10 +13,10 @@ import { Octokit } from "https://cdn.skypack.dev/@octokit/rest";
 //       }
 //     }
 //   ).catch(err, ()=> {
-
 //   });
 // };
 
+// https://docs.github.com/en/rest/orgs/members?apiVersion=2022-11-28
 async function SignupToOrg(in_token, email)
 {
   if (in_token)
