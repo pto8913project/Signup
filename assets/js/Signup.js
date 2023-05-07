@@ -33,10 +33,12 @@ async function SignupToOrg(in_token, user, email)
 
   if (IsMember(octokit, user) === true)
   {
+    alert(user + ' : はすでに登録されています');
     return;
   }
   else if (IsPending(octokit, user, email) === true)
   {
+    alert("すでに送信済みですメール" + email + "を確認してください。");
     return;
   }
   else
@@ -82,7 +84,6 @@ async function IsMember(octokit, user)
 
     if (member.login === user)
     {
-      alert(user + ' : はすでに登録されています');
       return true;
     }
   }
@@ -107,7 +108,6 @@ async function IsPending(octokit, user, email)
 
     if (member.email === email)
     {
-      alert("すでに送信済みですメール" + email + "を確認してください。");
       return true;
     }
   }
