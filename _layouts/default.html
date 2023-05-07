@@ -6,6 +6,9 @@
   <meta name="author" content="{{ page.author | default: site.author | escape }}">
   <meta name="generator" content="Jekyll v{{ jekyll.version }}">
   <link rel="canonical" href="{{ page.url | absolute_url }}">
+  <head>
+    <link rel="stylesheet" href="{{ '/assets/css/layout.css' | relative_url }}"
+  </head>
 
   {{ content }}
 </html>
