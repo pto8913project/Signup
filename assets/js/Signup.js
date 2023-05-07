@@ -70,6 +70,10 @@ async function SignupToOrg(in_token, user, email)
   }
 };
 
+// console.log(member);
+// console.log(member.name);
+// console.log(member.email);
+// console.log(member.login);
 async function IsMember(octokit, user)
 {
   const members = await octokit.request(
@@ -79,13 +83,6 @@ async function IsMember(octokit, user)
 
   for (const member of members.data)
   {
-    // console.log("----- Is Member -----");
-    // console.log(member);
-    // console.log(member.name);
-    // console.log(member.email);
-    // console.log(member.login);
-    // console.log("----- Is Member -----");
-
     if (member.login === user)
     {
       console.log("already member : " + user);
@@ -104,12 +101,6 @@ async function IsPending(octokit, email)
 
   for (const member of members.data)
   {
-    // console.log("----- Is Pending -----");
-    // console.log(member);
-    // console.log(member.name);
-    // console.log(member.email);
-    // console.log(member.login);
-    // console.log("----- Is Pending -----");
 
     if (member.email === email)
     {
