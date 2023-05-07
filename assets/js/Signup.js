@@ -35,8 +35,10 @@ async function SignupToOrg(in_token, user, email)
     org: ORG,
     headers: OctHeader
   })
-  console.log(members.email);
-  console.log(members.items.email);
+  for (var item in members)
+  {
+    console.log(item.email);
+  }
 
   const response = await octokit.request(
     'POST /orgs/{org}/invitations', 
