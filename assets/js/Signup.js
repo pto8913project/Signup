@@ -31,19 +31,21 @@ async function SignupToOrg(in_token, user, email)
 
   const octokit = new Octokit({ auth: in_token })
 
-  const isMember = IsMember(octokit, user);
+  const isMember = await IsMember(octokit, user);
   console.log("member ? " + isMember);
   console.log("member === ? " + (isMember === true));
   console.log("member == ? " + (isMember == true));
+
   if (isMember === true)
   {
     alert(user + ' : はすでに登録されています');
     return;
   }
-  const isPending = IsPending(octokit, email);
+  const isPending = await IsPending(octokit, email);
   console.log("pending ? " + isPending);
   console.log("pending === ? " + (isPending === true));
   console.log("pending == ? " + (isPending == true));
+
   if (isPending === true)
   {
     alert("すでに送信済みですメール" + email + "を確認してください。");
