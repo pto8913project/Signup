@@ -71,12 +71,12 @@ async function IsMember(octokit, user)
 
   for (const member of members.data)
   {
-    console.log("----- Is Member -----");
-    console.log(member.name);
-    console.log(member.email);
-    console.log(member.login);
-    console.log(member);
-    console.log("----- Is Member -----");
+    // console.log("----- Is Member -----");
+    // console.log(member);
+    // console.log(member.name);
+    // console.log(member.email);
+    // console.log(member.login);
+    // console.log("----- Is Member -----");
 
     if (member.login === user)
     {
@@ -96,12 +96,12 @@ async function IsPending(octokit, user, email)
 
   for (const member of members.data)
   {
-    console.log("----- Is Pending -----");
-    console.log(member.name);
-    console.log(member.email);
-    console.log(member.login);
-    console.log(member);
-    console.log("----- Is Pending -----");
+    // console.log("----- Is Pending -----");
+    // console.log(member);
+    // console.log(member.name);
+    // console.log(member.email);
+    // console.log(member.login);
+    // console.log("----- Is Pending -----");
 
     if (member.email === email)
     {
