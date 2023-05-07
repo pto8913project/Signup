@@ -1,4 +1,8 @@
 import { Octokit } from "https://cdn.skypack.dev/@octokit/rest";
+
+const ORG = "pto8913project";
+const OctHeader = { 'X-GitHub-Api-Version': '2022-11-28' };
+
 // Octokit.js
 // https://github.com/octokit/core.js#readme
 
@@ -25,23 +29,15 @@ async function SignupToOrg(in_token, user, email)
     return;
   }
 
-  const ORG = "pto8913project";
-  const OctHeader = { 'X-GitHub-Api-Version': '2022-11-28' };
+  const octokit = new Octokit({ auth: in_token })
 
-  const octokit = new Octokit({
-    auth: in_token
-  })
-  const members = await octokit.request('GET /orgs/{org}/members', {
-    org: ORG, headers: OctHeader
-  })
-  
-  for (const member of members.data)
+  if (IsMember(octokit, user))
   {
-    console.log(member);
-    console.log(member.name);
-    console.log(member.email);
-    console.log(member.id);
-    console.log(member.login);
+    return;
+  }
+  if (IsPending(octokit, user, email))
+  {
+    return;
   }
 
   const response = await octokit.request(
@@ -50,10 +46,7 @@ async function SignupToOrg(in_token, user, email)
       org: ORG,
       email: email,
       role: 'direct_member',
-      team_ids: [
-        12,
-        26
-      ],
+      team_ids: [ 12, 26 ],
       headers: OctHeader
     }
   )
@@ -67,12 +60,45 @@ async function SignupToOrg(in_token, user, email)
     alert("tokenかemailが間違っています確認してください。\n tokenが間違っている場合はpto8913project@gmail.comにご連絡ください");
     return;
   }
-  else if (response.status === 422)
-  {
-    alert("すでに送信済みですメール" + email + "を確認してください。");
-    return;
-  }
 };
+async function IsMember(octokit, user)
+{
+  const members = await octokit.request(
+    'GET /orgs/{org}/members', 
+    {
+    org: ORG, headers: OctHeader
+    }
+  )
+
+  for (const member of members.data)
+  {
+    if (member.login == user)
+    {
+      alert(user + ' : はすでに登録されています');
+      return true;
+    }
+  }
+  return false;
+}
+
+async function IsPending(octokit, user, email)
+{
+  const response = await octokit.request(
+    'GET /orgs/{org}/invitations', 
+    {
+      org: ORG, headers: OctHeader
+    }
+  );
+
+  for (const member of members.data)
+  {
+    if (member.login == user)
+    {
+      alert("すでに送信済みですメール" + email + "を確認してください。");
+      return;
+    }
+  }
+}
 
 const ToOrgButton = document.getElementById("ToOrg");
 ToOrgButton.addEventListener(
