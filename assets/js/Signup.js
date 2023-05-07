@@ -103,7 +103,7 @@ async function IsPending(octokit, user, email)
     console.log(member);
     console.log("----- Is Pending -----");
 
-    if (member.login === user)
+    if (member.email === email)
     {
       alert("すでに送信済みですメール" + email + "を確認してください。");
       return true;
