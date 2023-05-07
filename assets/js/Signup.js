@@ -35,30 +35,32 @@ async function SignupToOrg(in_token, user, email)
   {
     return;
   }
-  if (IsPending(octokit, user, email) === true)
+  else if (IsPending(octokit, user, email) === true)
   {
     return;
   }
-
-  const response = await octokit.request(
-    'POST /orgs/{org}/invitations', 
+  else
+  {
+    const response = await octokit.request(
+      'POST /orgs/{org}/invitations', 
+      {
+        org: ORG,
+        email: email,
+        role: 'direct_member',
+        team_ids: [ 12, 26 ],
+        headers: OctHeader
+      }
+    )
+    if (response.status === 201)
     {
-      org: ORG,
-      email: email,
-      role: 'direct_member',
-      team_ids: [ 12, 26 ],
-      headers: OctHeader
+      alert("pto8913から " + email + " に招待メールが送られました。確認してください");
+      return;
     }
-  )
-  if (response.status === 201)
-  {
-    alert("pto8913から " + email + " に招待メールが送られました。確認してください");
-    return;
-  }
-  else if (response.status === 401)
-  {
-    alert("tokenかemailが間違っています確認してください。\n tokenが間違っている場合はpto8913project@gmail.comにご連絡ください");
-    return;
+    else if (response.status === 401)
+    {
+      alert("tokenかemailが間違っています確認してください。\n tokenが間違っている場合はpto8913project@gmail.comにご連絡ください");
+      return;
+    }
   }
 };
 
