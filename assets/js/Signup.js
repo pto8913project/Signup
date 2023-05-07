@@ -35,7 +35,7 @@ async function SignupToOrg(in_token, user, email)
     org: ORG,
     headers: OctHeader
   })
-  for (var item in members)
+  for (var item in members.items)
   {
     console.log(item.email);
   }
