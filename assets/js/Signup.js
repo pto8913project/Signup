@@ -31,38 +31,40 @@ async function SignupToOrg(in_token, user, email)
 
   const octokit = new Octokit({ auth: in_token })
 
-  if (IsMember(octokit, user) === true)
+  const isMember = IsMember(octokit, user);
+  console.log("member ? " + isMember === true);
+  if (isMember === true)
   {
     alert(user + ' : はすでに登録されています');
     return;
   }
-  else if (IsPending(octokit, user, email) === true)
+  const isPending = IsPending(octokit, email);
+  console.log("pending ? " + isPending === true);
+  if (isPending === true)
   {
     alert("すでに送信済みですメール" + email + "を確認してください。");
     return;
   }
-  else
+  
+  const response = await octokit.request(
+    'POST /orgs/{org}/invitations', 
+    {
+      org: ORG,
+      email: email,
+      role: 'direct_member',
+      team_ids: [ 12, 26 ],
+      headers: OctHeader
+    }
+  )
+  if (response.status === 201)
   {
-    const response = await octokit.request(
-      'POST /orgs/{org}/invitations', 
-      {
-        org: ORG,
-        email: email,
-        role: 'direct_member',
-        team_ids: [ 12, 26 ],
-        headers: OctHeader
-      }
-    )
-    if (response.status === 201)
-    {
-      alert("pto8913から " + email + " に招待メールが送られました。確認してください");
-      return;
-    }
-    else if (response.status === 401)
-    {
-      alert("tokenかemailが間違っています確認してください。\n tokenが間違っている場合はpto8913project@gmail.comにご連絡ください");
-      return;
-    }
+    alert("pto8913から " + email + " に招待メールが送られました。確認してください");
+    return;
+  }
+  else if (response.status === 401)
+  {
+    alert("tokenかemailが間違っています確認してください。\n tokenが間違っている場合はpto8913project@gmail.comにご連絡ください");
+    return;
   }
 };
 
@@ -92,7 +94,7 @@ async function IsMember(octokit, user)
   return false;
 }
 
-async function IsPending(octokit, user, email)
+async function IsPending(octokit, email)
 {
   const members = await octokit.request(
     'GET /orgs/{org}/invitations', 
