@@ -71,6 +71,13 @@ async function IsMember(octokit, user)
 
   for (const member of members.data)
   {
+    console.log("----- Is Member -----");
+    console.log(member.name);
+    console.log(member.email);
+    console.log(member.login);
+    console.log(member);
+    console.log("----- Is Member -----");
+
     if (member.login === user)
     {
       alert(user + ' : はすでに登録されています');
@@ -89,10 +96,13 @@ async function IsPending(octokit, user, email)
 
   for (const member of members.data)
   {
+    console.log("----- Is Pending -----");
     console.log(member.name);
     console.log(member.email);
     console.log(member.login);
     console.log(member);
+    console.log("----- Is Pending -----");
+
     if (member.login === user)
     {
       alert("すでに送信済みですメール" + email + "を確認してください。");
