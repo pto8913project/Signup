@@ -64,6 +64,11 @@ async function SignupToOrg(in_token, user, email)
         headers: OctHeader
       }
     )
+    if (response.status === 201)
+    {
+      alert("pto8913から " + email + " に招待メールが送られました。確認してください");
+      return;
+    }
   }
   catch(error)
   {
@@ -72,11 +77,6 @@ async function SignupToOrg(in_token, user, email)
       alert("入力内容が間違っています\n tokenが間違っている場合はpto8913project@gmail.comにご連絡ください");
       return;
     }
-  }
-  if (response.status === 201)
-  {
-    alert("pto8913から " + email + " に招待メールが送られました。確認してください");
-    return;
   }
 };
 
