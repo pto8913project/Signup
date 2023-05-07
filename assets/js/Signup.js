@@ -32,13 +32,9 @@ async function SignupToOrg(in_token, user, email)
     auth: in_token
   })
   const members = await octokit.request('GET /orgs/{org}/members', {
-    org: ORG,
-    headers: OctHeader
+    org: ORG, headers: OctHeader
   })
-  for (var item in members.items)
-  {
-    console.log(item);
-  }
+  console.log(members);
 
   const response = await octokit.request(
     'POST /orgs/{org}/invitations', 
