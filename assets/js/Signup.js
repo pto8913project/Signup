@@ -89,6 +89,10 @@ async function IsPending(octokit, user, email)
 
   for (const member of members.data)
   {
+    console.log(member.name);
+    console.log(member.email);
+    console.log(member.login);
+    console.log(member);
     if (member.login === user)
     {
       alert("すでに送信済みですメール" + email + "を確認してください。");
