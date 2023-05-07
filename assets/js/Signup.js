@@ -31,11 +31,11 @@ async function SignupToOrg(in_token, user, email)
 
   const octokit = new Octokit({ auth: in_token })
 
-  if (IsMember(octokit, user))
+  if (IsMember(octokit, user) == true)
   {
     return;
   }
-  if (IsPending(octokit, user, email))
+  if (IsPending(octokit, user, email) == true)
   {
     return;
   }
@@ -72,7 +72,7 @@ async function IsMember(octokit, user)
 
   for (const member of members.data)
   {
-    if (member.login == user)
+    if (member.login === user)
     {
       alert(user + ' : はすでに登録されています');
       return true;
@@ -92,7 +92,7 @@ async function IsPending(octokit, user, email)
 
   for (const member of members.data)
   {
-    if (member.login == user)
+    if (member.login === user)
     {
       alert("すでに送信済みですメール" + email + "を確認してください。");
       return;
