@@ -52,24 +52,27 @@ async function SignupToOrg(in_token, user, email)
     return;
   }
   
-  const response = await octokit.request(
-    'POST /orgs/{org}/invitations', 
-    {
-      org: ORG,
-      email: email,
-      role: 'direct_member',
-      team_ids: [ 12, 26 ],
-      headers: OctHeader
-    }
-  ).catch(
-    async(error) => {
-      if (error.status === 401)
+  try
+  {
+    const response = await octokit.request(
+      'POST /orgs/{org}/invitations', 
       {
-        alert("入力内容が間違っています\n tokenが間違っている場合はpto8913project@gmail.comにご連絡ください");
-        return;
+        org: ORG,
+        email: email,
+        role: 'direct_member',
+        team_ids: [ 12, 26 ],
+        headers: OctHeader
       }
+    )
+  }
+  catch(error)
+  {
+    if (error.status === 401)
+    {
+      alert("入力内容が間違っています\n tokenが間違っている場合はpto8913project@gmail.comにご連絡ください");
+      return;
     }
-  );
+  }
   if (response.status === 201)
   {
     alert("pto8913から " + email + " に招待メールが送られました。確認してください");
