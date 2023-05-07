@@ -7,11 +7,16 @@ import { Octokit } from "https://cdn.skypack.dev/@octokit/rest";
 
 // add org member
 // https://docs.github.com/en/rest/orgs/members?apiVersion=2022-11-28
-async function SignupToOrg(in_token, email)
+async function SignupToOrg(in_token, user, email)
 {
   if (!in_token)
   {
     alert('tokenを入力してください');
+    return;
+  }
+  if (!user)
+  {
+    alert('github idを入力してください');
     return;
   }
   if (!email)
@@ -20,22 +25,30 @@ async function SignupToOrg(in_token, email)
     return;
   }
 
+  const ORG = "pto8913project";
+  const OctHeader = { 'X-GitHub-Api-Version': '2022-11-28' };
+
   const octokit = new Octokit({
     auth: in_token
   })
+  const members = await octokit.request('GET /orgs/{org}/members', {
+    org: ORG,
+    headers: OctHeader
+  })
+  console.log(members.email);
+  console.log(members.items.email);
+
   const response = await octokit.request(
     'POST /orgs/{org}/invitations', 
     {
-      org: 'pto8913project',
+      org: ORG,
       email: email,
       role: 'direct_member',
       team_ids: [
         12,
         26
       ],
-      headers: {
-        'X-GitHub-Api-Version': '2022-11-28'
-      }
+      headers: OctHeader
     }
   )
   if (response.status === 201)
@@ -59,8 +72,9 @@ const ToOrgButton = document.getElementById("ToOrg");
 ToOrgButton.addEventListener(
   'click', 
   ()=> {
+    var user_name = document.getElementsByName('user_name')[0].value;
     var user_email = document.getElementsByName('user_email')[0].value;
     var in_token = document.getElementsByName('token')[0].value;
-    SignupToOrg(in_token, user_email);
+    SignupToOrg(in_token, user_name, user_email);
   }
 );
