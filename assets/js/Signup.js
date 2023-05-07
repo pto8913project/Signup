@@ -103,7 +103,6 @@ async function IsPending(octokit, email)
 
   for (const member of members.data)
   {
-
     if (member.email === email)
     {
       console.log("pending email : " + email);
