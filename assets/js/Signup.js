@@ -89,7 +89,7 @@ async function IsMember(octokit, user)
 
 async function IsPending(octokit, user, email)
 {
-  const response = await octokit.request(
+  const members = await octokit.request(
     'GET /orgs/{org}/invitations', 
     { org: ORG, headers: OctHeader }
   );
