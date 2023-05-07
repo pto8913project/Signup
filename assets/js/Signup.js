@@ -84,6 +84,8 @@ async function IsMember(octokit, user)
 
     if (member.login === user)
     {
+      console.log(member.login + " === " + user + member.login === user);
+      console.log((member.login === user) === true);
       return true;
     }
   }
@@ -108,6 +110,8 @@ async function IsPending(octokit, user, email)
 
     if (member.email === email)
     {
+      console.log(member.email + " === " + email + member.email === email);
+      console.log((member.email === email) === true);
       return true;
     }
   }
