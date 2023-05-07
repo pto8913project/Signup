@@ -40,17 +40,17 @@ async function SignupToOrg(in_token, email)
   )
   if (response.status === 201)
   {
-    alert("pto8913から{mail}に招待メールが送られました", {mail: email});
+    alert("pto8913から " + email + " に招待メールが送られました。確認してください");
     return;
   }
-    if (response.status === 401)
-  {
-    alert("すでに送信済みです{mail}をご確認ください。", {mail, email});
-    return;
-  }
-  if (response.status === 401)
+  else if (response.status === 401)
   {
     alert("tokenかemailが間違っています確認してください。\n tokenが間違っている場合はpto8913project@gmail.comにご連絡ください");
+    return;
+  }
+  else if (response.status === 422)
+  {
+    alert("すでに送信済みですメール" + email + "を確認してください。");
     return;
   }
 };
