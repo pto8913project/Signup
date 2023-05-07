@@ -37,7 +37,7 @@ async function SignupToOrg(in_token, user, email)
   })
   for (var item in members.items)
   {
-    console.log(item.email);
+    console.log(item);
   }
 
   const response = await octokit.request(
