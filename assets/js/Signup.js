@@ -31,11 +31,11 @@ async function SignupToOrg(in_token, user, email)
 
   const octokit = new Octokit({ auth: in_token })
 
-  if (IsMember(octokit, user) == true)
+  if (IsMember(octokit, user) === true)
   {
     return;
   }
-  if (IsPending(octokit, user, email) == true)
+  if (IsPending(octokit, user, email) === true)
   {
     return;
   }
