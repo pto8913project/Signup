@@ -61,13 +61,12 @@ async function SignupToOrg(in_token, user, email)
     return;
   }
 };
+
 async function IsMember(octokit, user)
 {
   const members = await octokit.request(
     'GET /orgs/{org}/members', 
-    {
-    org: ORG, headers: OctHeader
-    }
+    { org: ORG, headers: OctHeader }
   )
 
   for (const member of members.data)
@@ -85,9 +84,7 @@ async function IsPending(octokit, user, email)
 {
   const response = await octokit.request(
     'GET /orgs/{org}/invitations', 
-    {
-      org: ORG, headers: OctHeader
-    }
+    { org: ORG, headers: OctHeader }
   );
 
   for (const member of members.data)
@@ -95,9 +92,10 @@ async function IsPending(octokit, user, email)
     if (member.login === user)
     {
       alert("すでに送信済みですメール" + email + "を確認してください。");
-      return;
+      return true;
     }
   }
+  return false;
 }
 
 const ToOrgButton = document.getElementById("ToOrg");
